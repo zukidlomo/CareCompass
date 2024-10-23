@@ -1,0 +1,242 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+    <style>
+        .mapp {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #0036da; 
+            background-image: url("static/img/loc.png"); 
+            background-repeat: repeat; 
+            background-size: auto; 
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 40px; /* Increased space below the title */
+        }
+
+        iframe {
+            margin-top: 70px;
+            max-width: 90%;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+     
+    </style>
+<div class ="mapp">
+
+    <iframe src="https://my.atlist.com/map/c020fbaa-eb2f-4139-b5c9-7f9c54b6d237/?share=true"
+            allow="geolocation 'self' https://my.atlist.com"
+            width="1200px"
+            height="550px"
+            loading="lazy"
+            frameborder="0"
+            scrolling="no"
+            allowfullscreen
+            id="atlist-embed">
+    </iframe>
+
+
+</div>
+
+
+
+
+<!----ADD LOCATION-->
+<style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* Button used to open the contact form - fixed at the bottom of the page */
+        .open-button {
+            background-color: #000;
+            color: #fff;
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            position: fixed;
+            bottom: 3px;
+            right: 28px;
+            width: 200px;
+        }
+        
+        /* The popup form - hidden by default */
+        .form-popup {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+            background-color: white;
+        }
+        
+        /* Add styles to the form container */
+        .form-container {
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+        }
+        
+        /* Flex container for form rows */
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        /* Flex item styling */
+        .form-row .form-group {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .form-row .form-group:last-child {
+            margin-right: 0;
+        }
+        
+        /* Label styling */
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        /* Input fields styling */
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        /* Button styling */
+        .form-container .btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            width: 48%;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+        
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+            background-color: red;
+        }
+        
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <button class="open-button" onclick="openForm()">Add Location +</button>
+    
+    <div class="form-popup" id="myForm">
+      <form action="/action_page.php" class="form-container">
+        <h3>Add a location</h3>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name"><b>Name</b></label>
+            <input type="text" id="name" placeholder="Enter Name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="surname"><b>Surname</b></label>
+            <input type="text" id="surname" placeholder="Enter Surname" name="surname" required>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email"><b>Email Address</b></label>
+            <input type="text" id="email" placeholder="Enter Email Address" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone"><b>Telephone Number</b></label>
+            <input type="text" id="phone" placeholder="Enter Telephone Number" name="phone" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="address"><b>Address</b></label>
+            <input type="text" id="address" placeholder="Enter Address" name="address" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="city"><b>City</b></label>
+            <input type="text" id="city" placeholder="Enter City" name="city" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="province"><b>Province</b></label>
+            <select id="province" name="province">
+              <option>Kwa-Zulu Natal</option>
+              <option>Gauteng</option>
+              <option>Western Cape</option>
+              <option>Eastern Cape</option>
+              <option>Northen Cape</option>
+              <option>Limpopo</option>
+              <option>North West</option>
+              <option>Mpumalanga</option>
+              <option>Free State</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="postal-code"><b>Postal Code</b></label>
+            <input type="text" id="postal-code" placeholder="Enter Postal Code" name="postal-code" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <button type="submit" class="btn">Submit</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </div>
+      </form>
+    </div>
+    
+    <script>
+        function openForm() {
+          document.getElementById("myForm").style.display = "block";
+        }
+        
+        function closeForm() {
+          document.getElementById("myForm").style.display = "none";
+        }
+    </script>
+</html>
+
+{% endblock %}
+
